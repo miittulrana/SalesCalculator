@@ -5,6 +5,10 @@ workflows:
     environment:
       node: latest  # Specify the latest Node.js version or a specific version if needed
     scripts:
+      - name: Clean project
+        script: |
+          rm -rf node_modules
+          rm package-lock.json
       - name: Install dependencies
         script: |
           npm install
@@ -18,11 +22,9 @@ workflows:
         script: |
           cd ios/App
           xcodebuild -scheme App -sdk iphoneos -configuration Release archive -archivePath $CM_BUILD_DIR/App.xcarchive
+          # Export the .ipa file
+          xcodebuild -exportArchive -archivePath $CM_BUILD_DIR/App.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $CM_BUILD_DIR
+
     artifacts:
-      - ios/App.xcarchive  # Archive file to keep
-      - ios/App.ipa        # Specify the generated .ipa file location
-    publishing:
-      scripts:
-        - name: Publish to App Store (Optional)
-          script: |
-            # Commands to publish the .ipa to App Store Connect or another service
+      - $CM_BUILD_DIR/*.ipa  # Automatically get the generated .ipa file from the build directory
+      - ios/App.xcarchive    # Archive file to keep
