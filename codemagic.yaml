@@ -11,11 +11,10 @@ workflows:
           npm install
       - name: Build the app
         script: |
+          ionic build
           ionic capacitor build ios --prod
+      - name: Sync with iOS
+        script: |
+          capacitor sync ios
     artifacts:
-      - build/ios/ipa
-    publishing:
-      scripts:
-        - name: Publish IPA
-          script: |
-            echo "Add publishing logic here if needed."
+      - ios/App/App/build/ios/ipa/*.ipa # Adjust this path if needed based on where the IPA file is generated
