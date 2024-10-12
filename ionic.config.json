@@ -1,5 +1,7 @@
 {
   "name": "DailySalesCalculator",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react-vite"
 }
