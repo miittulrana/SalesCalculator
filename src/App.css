@@ -1,0 +1,21 @@
+/* App.css */
+body {
+  font-family: Arial, sans-serif;
+}
+
+h3 {
+  color: #FFD700; /* Gold color for headers */
+}
+
+p {
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  h3 {
+    font-size: 1.2rem; /* Adjust font size for smaller screens */
+  }
+  
+  /* You can add other styles specific to smaller devices here */
+}
