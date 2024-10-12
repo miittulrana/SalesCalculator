@@ -1,0 +1,21 @@
+workflows:
+  ios-build:
+    name: iOS Build
+    environment:
+      node: latest
+      xcode: latest
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm install -g @ionic/cli
+          npm install
+      - name: Build the app
+        script: |
+          ionic capacitor build ios --prod
+    artifacts:
+      - build/ios/ipa
+    publishing:
+      scripts:
+        - name: Publish IPA
+          script: |
+            echo "Add publishing logic here if needed."
