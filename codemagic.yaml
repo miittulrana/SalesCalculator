@@ -5,9 +5,10 @@ workflows:
       node: latest
       xcode: latest
     scripts:
-      - name: Install dependencies
+      - name: Install Ionic CLI and Capacitor
         script: |
           npm install -g @ionic/cli
+          npm install -g @capacitor/cli # Install Capacitor CLI globally
           npm install
       - name: Build the app
         script: |
@@ -15,6 +16,6 @@ workflows:
           ionic capacitor build ios --prod
       - name: Sync with iOS
         script: |
-          capacitor sync ios
+          npx cap sync ios # Use npx to run Capacitor without global installation issues
     artifacts:
       - ios/App/App/build/ios/ipa/*.ipa # Adjust this path if needed based on where the IPA file is generated
